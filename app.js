@@ -43,10 +43,10 @@ const criaLi = () => {
 
 const criaBotaoRemover = li => {
     const botao = document.createElement('button')
-    botao.innerText = '×'
+    botao.innerHTML = `<img src="./assets/trash-2.svg">`
     botao.setAttribute('class', 'remove')
     li.appendChild(botao)
-    
+
 }
 
 const criaCheck = li => {
@@ -68,6 +68,7 @@ const criaTarefa = text => {
     ul.appendChild(span)
     ul.appendChild(li)
     li.appendChild(span)
+    span.setAttribute('class', 'nameTask')
     span.innerText += text
     criaBotaoRemover(li)
 }
@@ -86,8 +87,24 @@ const salvaTarefas = () => {
     localStorage.setItem('tarefas', tarefasJSON)
 }
 
+input.addEventListener('keypress', e => {
+    if (e.keyCode === 13) {
+        if(!input.value) {
+            alert('Vocẽ precisa preencher o input')
+            return
+        }
+        criaTarefa(input.value)
+        limpaInput()
+        salvaTarefas()
+        location.reload()
+    }
+})
+
 btn.addEventListener('click', () => {
-    if(!input.value) return
+    if(!input.value) {
+        alert('Vocẽ precisa preencher o input')
+        return
+    }
     criaTarefa(input.value)
     limpaInput()
     salvaTarefas()
@@ -118,24 +135,41 @@ remove.forEach(item => {
 
 const selecionado = document.querySelectorAll('.inputCheck')
 
-selecionado.forEach(item => {
-    item.addEventListener('change', () => {
-        if (item.checked) {
-            const li = item.parentElement
-            li.classList.add('red')
-        } else {
-            const li = item.parentElement
-            li.classList.remove('red')
-        }
+const marcaInput = () => {
+    selecionado.forEach((item, index) => {
+        item.addEventListener('change', () => {
+            if (item.checked) {
+                let li = item.parentElement
+                const name = li.querySelector('.nameTask')
+                name.classList.add('checked')
+            } else {
+                let li = item.parentElement
+                const name = li.querySelector('.nameTask')
+                name.classList.remove('checked')   
+            }
+        })
     })
-})
+}
 
-input.addEventListener('keypress', e => {
-    if (e.keyCode === 13) {
-        if(!input.value) return
-        criaTarefa(input.value)
-        limpaInput()
+const buttonRemoveAll = () => {
+    const button = document.createElement('button')
+    button.setAttribute('class', 'removeAll')
+    button.innerText = 'remove all'
+    const container = document.querySelector('.containerGlobal')
+    container.appendChild(button)
+    button.addEventListener('click', () => {
+    const tarefas = document.querySelectorAll('.tarefas')
+
+    tarefas.forEach(e => {
+        e.remove()
         salvaTarefas()
-        location.reload()
-    }
+        button.style.display = 'none'
+    })
+    
 })
+    
+}
+
+buttonRemoveAll()
+
+marcaInput()

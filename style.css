@@ -6,21 +6,105 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
+ul {
+    list-style: none;
 }
 
-.red {
-    color: red
+body {
+    font-family: 'Roboto', sans-serif;
+    background: skyblue;
+}
+
+.checked {
+    text-decoration: line-through;
+    color: rgba(255, 0, 34, 0.836);
+    opacity: .5;
+}
+
+.tarefas{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .remove {
-    background: none;
     border: none;
     cursor: pointer;
     font-size: 21px;
-    line-height: 1;
-    font-weight: bold;
-    opacity: .2;
-    color: #000;
+    background: none;
+    opacity: .7;
+}
+
+.remove:hover {
+    opacity: 1  ;
+}
+
+h1 {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.addTask {
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 40px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.addTask input {
+    width: 80%;
+    border: none;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+    padding: 20px;
+    font-size: 15px;
+}
+
+.addTask button {
+    width: 20%;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+
+main {
+    display: flex;
+    margin: 0 auto;
+    background: #fff;
+    width: 400px;
+    border-radius: 5px;
+}
+
+.containerGlobal {
+    padding: 20px;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.search {
+    margin-bottom: 20px;
+    padding: 7px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: #ddd;
+    font-size: 15px;
+}
+
+.removeAll {
+    margin: 20px 0 0 0;
+    background: rgba(255, 0, 34, 0.836);
+    padding: 4px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    color: #fff;
 }
